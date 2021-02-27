@@ -470,7 +470,15 @@ class Pusher implements LoggerAwareInterface, PusherInterface
      *
      * @return object
      */
-    public function trigger($channels, $event, $data, $params = array(), $already_encoded = false)
+
+
+    // TODO see why laravel is not sending same parameters that trigger function needs
+ 
+	// original function declaration
+    ////public function trigger($channels, $event, $data, $params = array(), $already_encoded = false)
+
+
+    public function trigger($channels, $event, $params = array(), $already_encoded = false, $data=null)
     {
         if (is_string($channels) === true) {
             $channels = array($channels);
@@ -539,7 +547,9 @@ class Pusher implements LoggerAwareInterface, PusherInterface
             $result->channels = get_object_vars($result->channels);
         }
 
-        return $result;
+	// TODO laravel is waiting for an array that contains status and body, not just the body
+        //return $result;
+        return $response;
     }
 
     /**
